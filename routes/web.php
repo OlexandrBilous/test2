@@ -21,7 +21,7 @@ Route::get('/about', [
         'as'=>'aboutone',
         'uses'=>'ArticleController@about'
     ]);
-Route::get('/articleOne/{id}' , [
+Route::get('/articleOne/{article}' , [
     'as' => 'articleOne',
     'uses'=>'Articlecontroller@articleOne' ]);
 

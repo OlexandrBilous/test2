@@ -19,10 +19,8 @@ class ArticleController extends Controller
         return view('about');
     }
 
-    public function articleOne($id)
+    public function articleOne (Article $article)
     {
-
-        $article = Article::find($id);
         return view('articleOne', ['article' => $article]);
     }
 }
