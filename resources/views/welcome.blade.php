@@ -91,6 +91,7 @@
                 <p>{{$article->content}}</p>
                 <h4>{{$article->postdate}}</h4>
             @endforeach
+            {{$articles->links()}}
             <a href="{{route('aboutone')}}">about</a>
 
         </div>

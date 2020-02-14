@@ -10,7 +10,7 @@ class ArticleController extends Controller
 {
     public function showArticle()
     {
-        $articles = Article::all();
+        $articles = Article::query()->paginate(3);
         return view('welcome', ['articles' => $articles]);
     }
 
