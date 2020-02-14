@@ -66,17 +66,17 @@
 <body>
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
+    <div class="top-right links">
+        @auth
+        <a href="{{ url('/home') }}">Home</a>
+        @else
+        <a href="{{ route('login') }}">Login</a>
 
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
+        @if (Route::has('register'))
+        <a href="{{ route('register') }}">Register</a>
+        @endif
+        @endauth
+    </div>
     @endif
 
     <div class="content">
@@ -86,13 +86,9 @@
 
         </div>
         <div>
-            @foreach($articles as $article)
-                <h2><a href="{{$article->link()}}">{{$article->title}}</a></h2>
-                <p>{{$article->content}}</p>
-                <h4>{{$article->postdate}}</h4>
-            @endforeach
-            <a href="{{route('aboutone')}}">about</a>
-
+            <h2>{{$article->title}}</h2>
+            <p>{{$article->content}}</p>
+            <h4>{{$article->postdate}}</h4>
         </div>
         {{--<div class="links">
             <a href="https://laravel.com/docs">Docs</a>

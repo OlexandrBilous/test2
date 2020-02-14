@@ -15,4 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about', 'AboutController@about');
+//Route::get('/about', 'AboutController@about');
+Route::get('/', 'ArticleController@showArticle');
+Route::get('/about', [
+        'as'=>'aboutone',
+        'uses'=>'ArticleController@about'
+    ]);
+Route::get('/articleOne/{id}' , [
+    'as' => 'articleOne',
+    'uses'=>'Articlecontroller@articleOne' ]);
+

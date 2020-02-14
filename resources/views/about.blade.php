@@ -1,3 +1,3 @@
 <h1>
-    {{$about}}
+paffpasmfpoamfpoamfpoamfopamfpomfsopmaf
 </h1>
