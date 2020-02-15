@@ -23,5 +23,14 @@ Route::get('/about', [
     ]);
 Route::get('/articleOne/{article}' , [
     'as' => 'articleOne',
-    'uses'=>'Articlecontroller@articleOne' ]);
+    'uses'=>'Articlecontroller@articleOne'
+]);
+Route::post('/addarticle', [
+   'as'=>'addArticle',
+   'uses'=>'ArticleController@addArticle'
+]);
 
+Route::get('/addtext', [
+    'as'=>'addtext',
+    'uses'=>'ArticleController@addtext'
+]);

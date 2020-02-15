@@ -85,26 +85,33 @@
 
 
         </div>
-        <div>
-            @foreach($articles as $article)
-                <h2><a href="{{$article->link()}}">{{$article->title}}</a></h2>
-                <p>{{$article->content}}</p>
-                <h4>{{$article->postdate}}</h4>
-            @endforeach
-            {{$articles->links()}}
-            <a href="{{route('aboutone')}}">about</a>
-                <a href="{{route('addtext')}}">Create text</a>
-        </div>
-        {{--<div class="links">
-            <a href="https://laravel.com/docs">Docs</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
-        </div>--}}
-    </div>
-</div>
-</body>
-</html>
+      <div>
+
+         <form method="post" action="{{ route('addArticle') }}" >
+              <div>
+                  <h3>Добавление статьи</h3>
+                  <input type="text" name="title" placeholder="Название" required>
+                  <input type="date" name="postdate" required>
+                  <textarea name="content" placeholder="Содержимое" rows="4" required></textarea>
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}" required>
+                  <input type="submit" value="Отправить">
+
+
+              </div>
+          </form>
+
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+

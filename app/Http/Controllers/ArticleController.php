@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
@@ -19,8 +20,30 @@ class ArticleController extends Controller
         return view('about');
     }
 
-    public function articleOne (Article $article)
+    public function addtext()
+    {
+        return view('addtext');
+    }
+
+    public function articleOne(Article $article)
     {
         return view('articleOne', ['article' => $article]);
     }
+
+    public function addArticle(Request $request)
+    {
+        $article = new Article;
+        $article->title = trim($request->input('title'));
+        $article->content = trim($request->input('content'));
+        $article->save();
+        return redirect()->back();
+
+
+    }
 }
+//  public function addArticle(Request $request)
+//    {
+//        Request::create($request->all());
+//        return redirect()->back();
+//    }
+//}
