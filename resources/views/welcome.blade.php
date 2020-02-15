@@ -93,7 +93,7 @@
             @endforeach
             {{$articles->links()}}
             <a href="{{route('aboutone')}}">about</a>
-                <a href="{{route('addtext')}}">Create text</a>
+                <a href="{{route('addtext')}}">Create new text</a>
         </div>
         {{--<div class="links">
             <a href="https://laravel.com/docs">Docs</a>
