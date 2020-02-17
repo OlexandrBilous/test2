@@ -34,3 +34,24 @@ Route::get('/addtext', [
     'as'=>'addtext',
     'uses'=>'ArticleController@addtext'
 ]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/article-change/{article}' , [
+    'as' => 'article-change',
+    'uses'=>'Articlecontroller@articleChange'
+]);
+Route::post('/article-save/{article}' , [
+    'as' => 'article-save',
+    'uses'=>'Articlecontroller@articleSave'
+]);
+Route::get('/article-delete/{article}' , [
+    'as' => 'article-delete',
+    'uses'=>'Articlecontroller@articleDelete'
+]);
