@@ -1,113 +1,38 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
+@section('content')
+    <form method="post" action="{{ route('addArticle') }}">
+        <div>
+            <h3>Добавление статьи</h3>
+            <div class="form-group">
+                <input type="text" class="form-control {{$errors->has('title') ? 'is-invalid' : ''}}" name="title"
+                       placeholder="Название" value="{{old('title')}}"
+                       aria-label="Username" aria-describedby="addon-wrapping">
+                @error('title')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
 
-    <title>Laravel</title>
+                <input type="date" name="postdate"
+                       class="form-control {{$errors->has('title') ? 'is-invalid' : ''}}">
+                @error('postdate')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
+                <textarea class="form-control {{$errors->has('title') ? 'is-invalid' : ''}}" name="content"
+                          placeholder="Содержимое"
+                          rows="4">{{ old('content') }}</textarea>
+                @error('content')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input class="btn btn-primary" type="submit" value="Отправить">
         </div>
-    @endif
-
-    <div class="content">
-        <div class="title m-b-md">
-            Laravel
-
-
-        </div>
-      <div>
-
-         <form method="post" action="{{ route('addArticle') }}" >
-              <div>
-                  <h3>Добавление статьи</h3>
-                  <input type="text" name="title" placeholder="Название" required>
-                  <input type="date" name="postdate" required>
-                  <textarea name="content" placeholder="Содержимое" rows="4" required></textarea>
-                  <input type="hidden" name="_token" value="{{ csrf_token() }}" required>
-                  <input type="submit" value="Отправить">
-
-
-              </div>
-          </form>
-
-
-
-
-
-
-
-
-      </div>
+    </form>
+@endsection
 
 
 
