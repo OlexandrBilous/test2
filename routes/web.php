@@ -18,16 +18,16 @@ Route::get('/', function () {
 //Route::get('/about', 'AboutController@about');
 Route::get('/', 'ArticleController@showArticle');
 Route::get('/about', [
-        'as'=>'aboutone',
-        'uses'=>'ArticleController@about'
-    ]);
+    'as'=>'aboutone',
+    'uses'=>'ArticleController@about'
+]);
 Route::get('/articleOne/{article}' , [
     'as' => 'articleOne',
     'uses'=>'Articlecontroller@articleOne'
 ]);
 Route::post('/addarticle', [
-   'as'=>'addArticle',
-   'uses'=>'ArticleController@addArticle'
+    'as'=>'addArticle',
+    'uses'=>'ArticleController@addArticle'
 ]);
 
 Route::get('/addtext', [
@@ -54,4 +54,8 @@ Route::post('/article-save/{article}' , [
 Route::get('/article-delete/{article}' , [
     'as' => 'article-delete',
     'uses'=>'Articlecontroller@articleDelete'
+]);
+Route::get('/article-menu/{article}' , [
+    'as' => 'article-menu',
+    'uses'=>'Articlecontroller@showMyArticle'
 ]);

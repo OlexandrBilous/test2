@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     <form method="post" action="{{ route('addArticle') }}">
         <div>
             <h3>Добавление статьи</h3>
@@ -29,10 +30,14 @@
                 @enderror
             </div>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input class="btn btn-primary" type="submit" value="Отправить">
+            <input class="btn btn-primary" type="submit" value="Разместить статью">
         </div>
     </form>
 @endsection
+
+
+
+
 
 
 

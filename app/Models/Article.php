@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    protected $fillable = ['content', 'title', 'postdate'];
+    protected $fillable = ['content', 'title', 'postdate', 'user_id'];
     protected $alias = 'articleOne';
 
     public function link()
@@ -17,5 +17,6 @@ class Article extends Model
 
 
 }
+
 
 

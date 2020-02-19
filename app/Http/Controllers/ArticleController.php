@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogPost;
 use App\Models\Article;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,14 @@ class ArticleController extends Controller
     {
         $articles = Article::query()->paginate(3);
         return view('welcome', ['articles' => $articles]);
+    }
+
+    public function showMyArticle()
+    {
+        $articles = Article::query()->where('user_id', '=', Auth::id())->paginate(3);
+        return view('articleMenu',  ['articles' => $articles]);
+
+
     }
 
     public function about()
@@ -33,7 +42,10 @@ class ArticleController extends Controller
 
     public function addArticle(StoreBlogPost $request)
     {
-        Article::create($request->validated());
+
+        $article = Article::create($request->validated());
+        $article->fill(['user_id' => \Auth::id()]);
+        $article->save();
         return redirect()->back();
 
     }
@@ -49,6 +61,7 @@ class ArticleController extends Controller
         $article->save();
         return redirect()->back();
     }
+
     public function articleDelete(Article $article, Request $request)
     {
         $article->delete($request->all());

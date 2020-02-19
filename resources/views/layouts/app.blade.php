@@ -24,22 +24,24 @@
 <body>
 <div class="container">
     @include('layouts.nav')
-<div class="position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Домашняя страница</a>
-            @else
-                <a href="{{ route('login') }}">Логин</a>
+    <div class="position-ref full-height">
+        @if (Route::has('login'))
+            <div class="top-right links">
+                @auth
+                    <a href="{{ url('/') }}">Добро пожаловать, {{Auth::user()->name}}</a>
+                @else
+                    <a href="{{ route('login') }}">Логин</a>
 
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Регистрация</a>
-                @endif
-            @endauth
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}">Регистрация</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
+        <div>
+            @yield('content')
         </div>
-    @endif
-    <div>
-    @yield('content')
     </div>
+</div>
 </body>
 </html>
