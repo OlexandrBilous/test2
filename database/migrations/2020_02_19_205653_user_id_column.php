@@ -14,8 +14,14 @@ class UserIdColumn extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->integer('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id', 'articles_user_id_users_id')
+                ->on('users')
+                ->references('id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
+
     }
 
     /**
@@ -25,6 +31,9 @@ class UserIdColumn extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropForeign('articles_user_id_users_id');
+            $table->dropColumn('user_id');
+        });
     }
 }

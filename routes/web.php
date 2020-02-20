@@ -55,7 +55,7 @@ Route::get('/article-delete/{article}' , [
     'as' => 'article-delete',
     'uses'=>'Articlecontroller@articleDelete'
 ]);
-Route::get('/article-menu/{article}' , [
+Route::get('/article-menu' , [
     'as' => 'article-menu',
     'uses'=>'Articlecontroller@showMyArticle'
 ]);
