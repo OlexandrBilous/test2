@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBlogPost;
 use App\Models\Article;
 use Auth;
 use Illuminate\Http\Request;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
@@ -37,7 +38,9 @@ class ArticleController extends Controller
 
     public function articleOne(Article $article)
     {
-        return view('articleOne', ['article' => $article]);
+        $user = User::where('id', '=', $article->user_id)->first();
+        $username = $user->name;
+        return view('articleOne', ['article' => $article, 'username' => $username]);
     }
 
     public function addArticle(StoreBlogPost $request)
