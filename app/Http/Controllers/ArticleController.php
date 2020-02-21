@@ -14,7 +14,7 @@ class ArticleController extends Controller
 {
     public function showArticle()
     {
-        $articles = Article::query()->paginate(3);
+        $articles = Article::query()->where('postdate', '<=', date('Y-m-d' ))->paginate(3);
         return view('welcome', ['articles' => $articles]);
     }
 
@@ -71,5 +71,10 @@ class ArticleController extends Controller
         return redirect()->back();
 
     }
+
+
+
+
+
 
 }

@@ -6,6 +6,7 @@
         <a href="{{route('article-change', $article)}}" class="btn btn-primary">Редактировать</a>
         <a href="{{route('article-delete', $article)}}" class="btn btn-danger">Удалить</a>
 
+
     </div>
 </div>
 

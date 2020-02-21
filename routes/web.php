@@ -59,3 +59,15 @@ Route::get('/article-menu' , [
     'as' => 'article-menu',
     'uses'=>'Articlecontroller@showMyArticle'
 ]);
+Route::get('/addCategoriesView', [
+    'as'=>'addCategoriesView',
+    'uses'=>'CategoriesController@addCategoriesView'
+]);
+Route::post('/addCategoriesForm', [
+    'as'=>'addCategoriesForm',
+    'uses'=>'CategoriesController@addCategoriesForm'
+]);
+Route::post('/categories-save/{categories}' , [
+    'as' => 'categories-save',
+    'uses'=>'CategoriesController@categoriesSave'
+]);
