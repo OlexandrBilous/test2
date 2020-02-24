@@ -11,12 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //Route::get('/about', 'AboutController@about');
-Route::get('/', 'ArticleController@showArticle');
+Route::get('/', 'ArticleController@showArticle')->name('index');
 Route::get('/about', [
     'as'=>'aboutone',
     'uses'=>'ArticleController@about'
@@ -70,4 +66,8 @@ Route::post('/addCategoriesForm', [
 Route::post('/categories-save/{categories}' , [
     'as' => 'categories-save',
     'uses'=>'CategoriesController@categoriesSave'
+]);
+Route::get('/category/{category}', [
+    'as' => 'category',
+    'uses' => 'ArticlesController@category'
 ]);

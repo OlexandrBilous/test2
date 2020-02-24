@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     protected $fillable = ['name'];
+    protected $aliasCategory = 'category';
     public $timestamps = false;
-    public function categories()
+    public function articles()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Article::class);
+    }
+
+    public function link()
+    {
+        return route($this->aliasCategory, $this);
     }
 }
 

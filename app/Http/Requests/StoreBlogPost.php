@@ -26,7 +26,8 @@ class StoreBlogPost extends FormRequest
         return [
             'title' => 'bail|required|max:255|min:5',
             'content' => 'bail|required|max:10000|min:10',
-            'postdate'=> 'bail|required|date'
+            'postdate' => 'bail|required|date',
+            'category_id' => 'bail|required|exists:categories,id',
         ];
     }
 }

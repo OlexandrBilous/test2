@@ -5,23 +5,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogPost;
 use App\Models\Article;
+use App\Models\Categories;
 use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\DB;
+
 
 class ArticleController extends Controller
 {
-    public function showArticle()
+    public function showArticle(Request $request)
     {
-        $articles = Article::query()->where('postdate', '<=', date('Y-m-d' ))->paginate(3);
-        return view('welcome', ['articles' => $articles]);
+        $articles = Article::query()
+            ->when($request->input('category_id'), function (Builder $builder, $categoryId) {
+                $builder->where('category_id', $categoryId);
+            })
+            ->where('postdate', '<=', date('Y-m-d'))
+            ->paginate(3);
+//    $categories = Categories::all();
+
+//        route('index' ,['category_id' => $category->id]) Пример для вьюхи
+        return view('welcome', [
+            'articles' => $articles,
+            'categories' => Categories::all(),
+        ]);
     }
 
     public function showMyArticle()
     {
         $articles = Article::query()->where('user_id', '=', Auth::id())->paginate(3);
-        return view('articleMenu',  ['articles' => $articles]);
+        $categories = Categories::all();
+        return view('articleMenu', ['articles' => $articles, 'categories' => $categories]);
 
 
     }
@@ -40,15 +54,16 @@ class ArticleController extends Controller
     {
         $user = User::where('id', '=', $article->user_id)->first();
         $username = $user->name;
-        return view('articleOne', ['article' => $article, 'username' => $username]);
+        $categories = $article->category->category;
+        return view('articleOne', ['article' => $article, 'username' => $username, 'categories' => $categories]);
     }
 
     public function addArticle(StoreBlogPost $request)
     {
+        /** @var User $user */
+        $user = $request->user();
+        $user->articles()->create($request->validated());
 
-        $article = Article::create($request->validated());
-        $article->fill(['user_id' => \Auth::id()]);
-        $article->save();
         return redirect()->back();
 
     }
@@ -72,9 +87,12 @@ class ArticleController extends Controller
 
     }
 
-
-
-
+    // отображение статтей по категориям
+    public function category(Categories $category)
+    {
+        $articles = Article::query()->where('category_id', '=', $category->id)->get();
+        return view('category', ['articles' => $articles, 'category' => $category]);
+    }
 
 
 }

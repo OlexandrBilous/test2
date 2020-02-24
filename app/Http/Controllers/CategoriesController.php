@@ -32,4 +32,9 @@ class CategoriesController extends Controller
         $categories->save();
         return redirect()->back();
     }
+    public function showCategories()
+    {
+        $articles = Categories::query()->all()->paginate(3);
+        return  ;
+    }
 }
