@@ -17,9 +17,9 @@ class ArticleController extends Controller
     public function showArticle(Request $request)
     {
         $articles = Article::query()
-            ->when($request->input('category_id'), function (Builder $builder, $categoryId) {
-                $builder->where('category_id', $categoryId);
-            })
+//            ->when($request->input('category_id'), function (Builder $builder, $categoryId) {
+//                $builder->where('category_id', $categoryId);
+//            })
             ->where('postdate', '<=', date('Y-m-d'))
             ->paginate(3);
 //    $categories = Categories::all();
@@ -27,7 +27,7 @@ class ArticleController extends Controller
 //        route('index' ,['category_id' => $category->id]) Пример для вьюхи
         return view('welcome', [
             'articles' => $articles,
-            'categories' => Categories::all(),
+//            'categories' => Categories::all(),
         ]);
     }
 
@@ -70,7 +70,10 @@ class ArticleController extends Controller
 
     public function articleChange(Article $article)
     {
-        return view('textchange', ['article' => $article]);
+        return view('textchange', [
+            'article' => $article,
+            'categories' => Categories::all(),
+        ]);
     }
 
     public function articleSave(Article $article, StoreBlogPost $request)
@@ -88,11 +91,11 @@ class ArticleController extends Controller
     }
 
     // отображение статтей по категориям
-    public function category(Categories $category)
-    {
-        $articles = Article::query()->where('category_id', '=', $category->id)->get();
-        return view('category', ['articles' => $articles, 'category' => $category]);
-    }
+//    public function category(Categories $category)
+//    {
+//        $articles = Article::query()->where('category_id', '=', $category->id)->get();
+//        return view('category', ['articles' => $articles, 'category' => $category]);
+//    }
 
 
 }

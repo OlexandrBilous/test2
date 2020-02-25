@@ -24,10 +24,10 @@ class StoreBlogPost extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'bail|required|max:255|min:5',
-            'content' => 'bail|required|max:10000|min:10',
-            'postdate' => 'bail|required|date',
-            'category_id' => 'bail|required|exists:categories,id',
+            'title' => 'required|max:1000|min:5',
+            'content' => 'required|max:10000|min:10',
+            'postdate' => 'required|date',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

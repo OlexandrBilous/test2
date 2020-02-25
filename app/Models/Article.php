@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\User;
 class Article extends Model
 {
     protected $fillable = ['content', 'title', 'postdate', 'user_id', 'category_id'];

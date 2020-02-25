@@ -22,8 +22,6 @@ class CategoriesController extends Controller
     public function addCategoriesForm(StoreCategoriesPost $request)
     {
         $categories = Categories::create($request->validated());
-        //$categories->fill(['user_id' => \Auth::id()]);
-        $categories->save();
         return redirect()->back();
     }
     public function categoriesSave(Categories $categories, StoreCategoriesPost $request)
