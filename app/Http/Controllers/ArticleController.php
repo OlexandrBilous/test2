@@ -22,12 +22,11 @@ class ArticleController extends Controller
 //            })
             ->where('postdate', '<=', date('Y-m-d'))
             ->paginate(3);
-//    $categories = Categories::all();
 
 //        route('index' ,['category_id' => $category->id]) Пример для вьюхи
         return view('welcome', [
             'articles' => $articles,
-//            'categories' => Categories::all(),
+           'categories' => Categories::all(),
         ]);
     }
 
@@ -91,11 +90,12 @@ class ArticleController extends Controller
     }
 
     // отображение статтей по категориям
-//    public function category(Categories $category)
-//    {
-//        $articles = Article::query()->where('category_id', '=', $category->id)->get();
-//        return view('category', ['articles' => $articles, 'category' => $category]);
-//    }
+
+    public function category(Categories $category)
+    {
+        $articles = Article::query()->where('category_id', '=', $category->id)->get();
+        return view('showCategories', ['articles' => $articles, 'category' => $category]);
+    }
 
 
 }

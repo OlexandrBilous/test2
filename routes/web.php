@@ -67,7 +67,11 @@ Route::post('/categories-save/{categories}' , [
     'as' => 'categories-save',
     'uses'=>'CategoriesController@categoriesSave'
 ]);
-Route::get('/category/{category}', [
-    'as' => 'category',
-    'uses' => 'ArticlesController@category'
+Route::get('/showCategories/{category}', [
+    'as' => 'showCategories',
+    'uses' => 'ArticleController@category'
+]);
+Route::post('/comment', [
+    'as' => 'comment',
+    'uses' => 'CommentController@new'
 ]);

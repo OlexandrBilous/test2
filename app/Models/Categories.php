@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     protected $fillable = ['name'];
-    protected $aliasCategory = 'category';
+    protected $aliasCategories = 'showCategories';
     public $timestamps = false;
     public function articles()
     {
@@ -16,7 +16,7 @@ class Categories extends Model
 
     public function link()
     {
-        return route($this->aliasCategory, $this);
+        return route($this->aliasCategories, $this);
     }
 }
 
