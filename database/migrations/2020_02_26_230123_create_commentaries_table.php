@@ -15,24 +15,25 @@ class CreateCommentariesTable extends Migration
     {
         Schema::create('commentaries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('articles_id')->unsigned()->index();
             $table->string('comment');
-            $table->integer('user_id')->index();
             $table->timestamps();
-        });
-        Schema::table('commentaries', function (Blueprint $table) {
-            $table->foreign('articles_id', 'commentaries_articles_id_commentaries_id')
+
+            $table->bigInteger('articles_id')->unsigned()->nullable();
+            $table->foreign('articles_id', 'commentaries_articles_id_articles_id')
+                ->on('articles')
                 ->references('id')
-                ->on('commentaries')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('user_id', 'articles_user_id_users_id')
-                ->references('id')
+
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id', 'commentaries_user_id_users_id')
                 ->on('users')
+                ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -41,12 +42,9 @@ class CreateCommentariesTable extends Migration
     public function down()
     {
         Schema::table('commentaries', function (Blueprint $table) {
-        $table->dropForeign('commentaries_articles_id_commentaries_id');
-        $table->dropColumn('articles_id');
-    });
-        Schema::table('commentaries', function (Blueprint $table) {
-            $table->dropForeign('articles_user_id_users_id');
-            $table->dropColumn('user_id');
+            $table->dropForeign('commentaries_articles_id_articles_id');
+            $table->dropForeign('commentaries_user_id_users_id');
         });
+        Schema::dropIfExists('commentaries');
     }
 }
