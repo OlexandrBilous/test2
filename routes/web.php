@@ -35,10 +35,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/article-change/{article}' , [
     'as' => 'article-change',
     'uses'=>'Articlecontroller@articleChange'
@@ -75,3 +71,9 @@ Route::post('/comment', [
     'as' => 'comment',
     'uses' => 'CommentController@new'
 ]);
+// отправка нового комментария
+Route::post('/comment', [
+    'as' => 'comment',
+    'uses' => 'CommentController@new'
+]);
+

@@ -1,9 +1,8 @@
 @extends('layouts.app')
-@section('content')
-    <h2>{{$article->title}}</h2>
-    <p>{{$article->content}}</p>
-    <h4>{{$article->postdate}}</h4>
-<h4>Автор - {{$username}}</h4>
+@include('article')
+
+@section('comment')
+
     <h4>Комментарии:</h4>
 
     @auth()
@@ -31,9 +30,6 @@
             <h4 class="card-text"><a href="#">{{ $comment->user->name }}</a>: {{ $comment->comment }}</h4>
             <em>{{$comment->updated_at}}</em>
         </div>
-        @endforeach
+    @endforeach
 
-{{--
-@yield('comment')
---}}
 @endsection

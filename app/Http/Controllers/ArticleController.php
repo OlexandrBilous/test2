@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBlogPost;
 use App\Models\Article;
 use App\Models\Categories;
+use App\Models\Comment;
 use Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -54,7 +55,8 @@ class ArticleController extends Controller
         $user = User::where('id', '=', $article->user_id)->first();
         $username = $user->name;
         $categories = $article->category->category;
-        return view('articleOne', ['article' => $article, 'username' => $username, 'categories' => $categories]);
+        $comments = Comment::where('articles_id', '=', $article->id)->get();;
+        return view('articleOne', ['article' => $article, 'username' => $username, 'categories' => $categories, 'comments' => $comments]);
     }
 
     public function addArticle(StoreBlogPost $request)

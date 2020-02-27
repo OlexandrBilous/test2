@@ -13,20 +13,20 @@ class CreateCommentariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commentaries', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('comment');
             $table->timestamps();
 
             $table->bigInteger('articles_id')->unsigned()->nullable();
-            $table->foreign('articles_id', 'commentaries_articles_id_articles_id')
+            $table->foreign('articles_id', 'comments_articles_id_articles_id')
                 ->on('articles')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->foreign('user_id', 'commentaries_user_id_users_id')
+            $table->foreign('user_id', 'comments_user_id_users_id')
                 ->on('users')
                 ->references('id')
                 ->onUpdate('cascade')
@@ -41,10 +41,10 @@ class CreateCommentariesTable extends Migration
      */
     public function down()
     {
-        Schema::table('commentaries', function (Blueprint $table) {
-            $table->dropForeign('commentaries_articles_id_articles_id');
-            $table->dropForeign('commentaries_user_id_users_id');
+        Schema::table('comments', function (Blueprint $table) {
+            $table->dropForeign('comments_articles_id_articles_id');
+            $table->dropForeign('comments_user_id_users_id');
         });
-        Schema::dropIfExists('commentaries');
+        Schema::dropIfExists('comments');
     }
 }

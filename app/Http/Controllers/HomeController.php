@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
-
+use App\Models\Comment;
 class HomeController extends Controller
 {
     /**
@@ -21,8 +22,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+    public function index(User $user)
     {
-        return view('home');
+        $comments = Comment::all();
+        return view('home', ['comments' => $comments]);
     }
 }
