@@ -15,7 +15,7 @@
             <div class="form-group">
 
                 <input type="date" name="postdate"
-                       class="form-control {{$errors->has('title') ? 'is-invalid' : ''}}">
+                       class="form-control {{$errors->has('postdate') ? 'is-invalid' : ''}}">
                 @error('postdate')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror

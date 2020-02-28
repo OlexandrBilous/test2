@@ -3,9 +3,16 @@
     <h2>{{$article->title}}</h2>
     <p>{{$article->content}}</p>
     <h4>{{$article->postdate}}</h4>
-<h4>Автор - {{$username}}</h4>
+<h4>Автор: {{$username}}</h4>
+    <h5>Категория: {{ $category }}</h5>
     <h4>Комментарии:</h4>
 
+    @foreach($comments as $comment)
+        <div class="card mt-2 mb-1">
+            <h4 class="card-text"><a href="#">{{ $comment->user->name }}</a>: {{ $comment->comment }}</h4>
+            <em>{{$comment->updated_at}}</em>
+        </div>
+        @endforeach
     @auth()
         <form method="post" action="{{ route('comment') }}">
             <input type="text" class="form-control mb-2" name="comment">
@@ -22,17 +29,9 @@
                 </div>
             @endif
 
-            <input type="submit" value="Отправить">
+            <input type="submit" value="Оставить комментарий">
         </form>
     @endauth
-
-    @foreach($comments as $comment)
-        <div class="card mt-2 mb-1">
-            <h4 class="card-text"><a href="#">{{ $comment->user->name }}</a>: {{ $comment->comment }}</h4>
-            <em>{{$comment->updated_at}}</em>
-        </div>
-        @endforeach
-
 {{--
 @yield('comment')
 --}}

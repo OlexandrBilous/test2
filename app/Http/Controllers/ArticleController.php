@@ -21,10 +21,11 @@ class ArticleController extends Controller
 //            ->when($request->input('category_id'), function (Builder $builder, $categoryId) {
 //                $builder->where('category_id', $categoryId);
 //            })
+            //        route('index' ,['category_id' => $category->id]) Пример для вьюхи
             ->where('postdate', '<=', date('Y-m-d'))
             ->paginate(3);
 
-//        route('index' ,['category_id' => $category->id]) Пример для вьюхи
+
         return view('welcome', [
             'articles' => $articles,
            'categories' => Categories::all(),
@@ -54,9 +55,10 @@ class ArticleController extends Controller
     {
         $user = User::where('id', '=', $article->user_id)->first();
         $username = $user->name;
-        $categories = $article->category->category;
+        $categories = Categories::where('id', '=', $article->category_id)->first();
+        $category = $categories->name;
         $comments = Comment::where('articles_id', '=', $article->id)->get();;
-        return view('articleOne', ['article' => $article, 'username' => $username, 'categories' => $categories, 'comments' => $comments]);
+        return view('articleOne', ['article' => $article, 'username' => $username, 'category' => $category, 'comments' => $comments]);
     }
 
     public function addArticle(StoreBlogPost $request)

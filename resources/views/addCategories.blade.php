@@ -5,10 +5,10 @@
         <div>
             <h3>Добавление категории</h3>
             <div class="form-group">
-                <input type="text" class="form-control {{$errors->has('title') ? 'is-invalid' : ''}}" name="name"
-                       placeholder="Название категории" value="{{old('title')}}"
+                <input type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" name="name"
+                       placeholder="Название категории" value="{{old('name')}}"
                        aria-label="Username" aria-describedby="addon-wrapping">
-                @error('title')
+                @error('name')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
